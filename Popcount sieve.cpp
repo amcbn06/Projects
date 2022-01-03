@@ -1,4 +1,5 @@
-
+// For a number x, its popcount represents
+// the number of set bits in binary form
 struct bitCountSieve {
 private:
     int size;
