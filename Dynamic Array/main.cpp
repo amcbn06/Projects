@@ -109,11 +109,11 @@ public:
 };
 
 int main() {
-    dynamic_array<int> dynarr;
+    dynamic_array<int> dynarr{ 3, 4, 5 };
     // push_back
     dynarr.push_back(1);
     // resize
-    dynarr.resize(3);
+    dynarr.resize(6);
     // size
     cout << "Size: " << dynarr.size() << '\n';
     // capacity
@@ -128,7 +128,7 @@ int main() {
     }
     cout << '\n';
     // assign
-    dynarr.assign(5, 7);
+    dynarr.assign(3, 7);
     dynarr.push_back(9);
     cout << "Size: " << dynarr.size() << '\n';
     // empty
