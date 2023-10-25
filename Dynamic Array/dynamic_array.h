@@ -38,6 +38,17 @@ public:
     dynamic_array(int _size) {
         resize(_size);
     }
+    // constructor with given size and given value
+    dynamic_array(int _size, _Type _value) {
+        assign(_size, _value);
+    }
+    // constructor with given initializer list
+    dynamic_array(initializer_list<_Type> _list) {
+        resize(_list.size());
+        for (auto _ptr = _list.begin(); _ptr != _list.end(); ++_ptr) {
+            table[_ptr - _list.begin()] = *_ptr;
+        }
+    }
     // function to resize the array
     void resize(int _new_size) {
         reserve(nfsb(_new_size));
