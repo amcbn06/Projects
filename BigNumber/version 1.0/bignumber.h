@@ -172,7 +172,7 @@ public:
 
     friend istream& operator>>(istream& is, BigNumber& other) {
         string str;
-        cin >> str;
+        is >> str;
         other.digits.resize(str.size());
         for (int i = 0; i < other.digits.size(); ++i) {
             other.digits[i] = str[str.size() - i - 1] - '0';
