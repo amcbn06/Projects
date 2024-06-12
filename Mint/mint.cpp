@@ -25,7 +25,10 @@ struct Mint {
     Mint operator-(const Mint& r) const { return Mint(*this) -= r; }
     Mint operator*(const Mint& r) const { return Mint(*this) *= r; }
     Mint operator/(const Mint& r) const { return Mint(*this) /= r; }
-    Mint pow(int n) const {
+    Mint pow(long long n) const {
+        if (n >= M) {
+            n %= M - 1;
+        }
         Mint res(1), aux(x);
         for (; n; n >>= 1) {
             if (n & 1) {
