@@ -8,6 +8,9 @@ struct union_find {
         this->size = size;
         father.resize(size);
         rank.resize(size);
+        for (int i = 1; i < size; ++i) {
+            father[i] = i, rank[i] = 1;
+        }
     }
     void clear() {
         this->size = 0;
@@ -17,7 +20,7 @@ struct union_find {
     int find(int x) {
         return father[x] == x ? x : (father[x] = find(father[x]));
     }
-    int merge(int x, int y) {
+    void merge(int x, int y) {
         x = find(x);
         y = find(y);
         if (x == y) {
@@ -34,4 +37,4 @@ struct union_find {
     bool connected(int x, int y) {
         return find(x) == find(y);
     }
-};
+} dsu(nmax + 5);
