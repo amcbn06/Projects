@@ -4,6 +4,8 @@ struct point {
     point() { }
     point(ll x, ll y) { this->x = x; this->y = y; }
     double length() { return sqrt(pow(x, 2) + pow(y, 2)); }
+    bool operator==(const point& other) const { return x == other.x && y == other.y; }
+    bool operator!=(const point& other) const { return !(*this == other); }
     friend point operator+(const point& a, const point& b) { return point(a.x + b.x, a.y + b.y); }
     friend point operator-(const point& a, const point& b) { return point(a.x - b.x, a.y - b.y); }
     friend bool operator<(const point& a, const point& b) { return make_pair(a.x, a.y) < make_pair(b.x, b.y); }
