@@ -67,5 +67,5 @@ void prec() {
 }
 
 mint combs(int n, int k) {
-    return fact[n] * invf[k] * invf[n - k];
+    return k < 0 || n < 0 || n - k < 0 ? 0 : fact[n] * invf[k] * invf[n - k];
 }
