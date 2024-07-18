@@ -1,5 +1,6 @@
+template<typename T>
 struct fenwick {
-    vector<int> table;
+    vector<T> table;
     int size;
     fenwick(int size = 0) {
         this->resize(size);
@@ -8,19 +9,19 @@ struct fenwick {
         this->size = size;
         table.assign(size, 0);
     }
-    void add(int i, int x) {
+    void add(int i, T x) {
         for (; i < size; i += i & -i) {
             table[i] += x;
         }
     }
-    int get(int i) {
-        int sum = 0;
+    T get(int i) {
+        T sum = 0;
         for (; i > 0; i -= i & -i) {
             sum += table[i];
         }
         return sum;
     }
-    int get(int i, int j) {
+    T get(int i, int j) {
         return get(j) - get(i - 1);
     }
 };
