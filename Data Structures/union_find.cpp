@@ -1,24 +1,15 @@
 struct union_find {
-    vector<int> father, rank;
-    int size, components = 0;
-    union_find(int size = 0) {
-        this->resize(size);
+    vector<int> parent, size;
+    union_find(int __size = 0) {
+        this->build(__size);
     }
-    void resize(int size) {
-        this->size = size;
-        father.resize(size);
-        rank.resize(size);
-        for (int i = 1; i < size; ++i) {
-            father[i] = i, rank[i] = 1;
-        }
-    }
-    void clear() {
-        this->size = 0;
-        father.clear();
-        rank.clear();
+    void build(int __size) {
+        parent.resize(__size);
+        iota(all(parent), 0);
+        size.assign(__size, 1);
     }
     int find(int x) {
-        return father[x] == x ? x : (father[x] = find(father[x]));
+        return parent[x] == x ? x : (parent[x] = find(parent[x]));
     }
     void merge(int x, int y) {
         x = find(x);
@@ -26,15 +17,14 @@ struct union_find {
         if (x == y) {
             return;
         }
-        components--;
-        if (rank[x] < rank[y]) {
+        if (size[x] < size[y]) {
             swap(x, y);
         }
-        father[y] = x;
-        rank[x] += rank[y];
-        rank[y] = 0;
+        parent[y] = x;
+        size[x] += size[y];
+        size[y] = 0;
     }
     bool connected(int x, int y) {
         return find(x) == find(y);
     }
-} dsu(nmax + 5);
+};
