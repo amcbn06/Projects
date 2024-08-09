@@ -76,6 +76,6 @@ struct Trie {
     }
 };
 
-using string_tie = Trie<'a', 26>;
-using digit_tie = Trie<'0', 10>;
-using bit_tie = Trie<'0', 2>;
+using string_trie = Trie<'a', 26>;
+using digit_trie = Trie<'0', 10>;
+using bit_trie = Trie<'0', 2>;
