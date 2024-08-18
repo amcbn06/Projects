@@ -3,7 +3,7 @@ const char FIRST = 'a';
 struct AhoCorasik {
     struct Node {
         int next[ALPHABET];
-        bool is_word = false;
+        bool ends = false;
         int par = -1;
         char last;
         int link = -1;
@@ -28,7 +28,7 @@ struct AhoCorasik {
             }
             u = nodes[u].next[c];
         }
-        nodes[u].is_word = true;
+        nodes[u].ends = true;
         // vedem in ce nod se termina fiecare string
         which.push_back(u);
     }
