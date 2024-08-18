@@ -2,12 +2,8 @@ const int ALPHABET = 26;
 const char FIRST = 'a';
 struct AhoCorasik {
     struct Node {
-        int next[ALPHABET];
-        bool ends = false;
-        int par = -1;
-        char last;
-        int link = -1;
-        int go[ALPHABET];
+        int next[ALPHABET], go[ALPHABET], ends = false;
+        int par = -1, last, link = -1;
         Node(int par = -1, char last = '$') : par(par), last(last) {
             fill(next, next + ALPHABET, -1);
             fill(go, go + ALPHABET, -1);
