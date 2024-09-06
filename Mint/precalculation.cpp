@@ -1,36 +1,35 @@
-// M prim
-template<int M>
-struct Mint {
+const int mod = 998244353;
+struct modint {
     int x;
-    Mint() : x(0) { }
-    Mint(int y) {
-        x = y % M;
+    modint() : x(0) { }
+    modint(int y) {
+        x = y % mod;
         if (x < 0) {
-            x += M;
+            x += mod;
         }
     }
-    Mint(long long y) {
-        x = y % M;
+    modint(long long y) {
+        x = y % mod;
         if (x < 0) {
-            x += M;
+            x += mod;
         }
     }
     int get() const { return x; }
-    int modulo() const { return M; }
-    bool operator==(const Mint& r) const { return x == r.x; }
-    Mint& operator+=(const Mint& r) { if ((x += r.x) >= M) x -= M; return *this; }
-    Mint& operator-=(const Mint& r) { if ((x += M - r.x) >= M) x -= M; return *this; }
-    Mint& operator*=(const Mint& r) { x = (long long)x * r.x % M; return *this; }
-    Mint& operator/=(const Mint& r) { x = (long long)x * r.inv().x % M; return *this; }
-    Mint operator+(const Mint& r) const { return Mint(*this) += r; }
-    Mint operator-(const Mint& r) const { return Mint(*this) -= r; }
-    Mint operator*(const Mint& r) const { return Mint(*this) *= r; }
-    Mint operator/(const Mint& r) const { return Mint(*this) /= r; }
-    Mint pow(long long n) const {
-        if (n >= M) {
-            n %= M - 1;
+    int modulo() const { return mod; }
+    bool operator==(const modint& r) const { return x == r.x; }
+    modint& operator+=(const modint& r) { if ((x += r.x) >= mod) x -= mod; return *this; }
+    modint& operator-=(const modint& r) { if ((x += mod - r.x) >= mod) x -= mod; return *this; }
+    modint& operator*=(const modint& r) { x = (long long)x * r.x % mod; return *this; }
+    modint& operator/=(const modint& r) { x = (long long)x * r.inv().x % mod; return *this; }
+    modint operator+(const modint& r) const { return modint(*this) += r; }
+    modint operator-(const modint& r) const { return modint(*this) -= r; }
+    modint operator*(const modint& r) const { return modint(*this) *= r; }
+    modint operator/(const modint& r) const { return modint(*this) /= r; }
+    modint pow(long long n) const {
+        if (n >= mod) {
+            n %= mod - 1;
         }
-        Mint res(1), aux(x);
+        modint res(1), aux(x);
         for (; n; n >>= 1) {
             if (n & 1) {
                 res *= aux;
@@ -39,26 +38,24 @@ struct Mint {
         }
         return res;
     }
-    Mint inv() const {
-        return this->pow(M - 2);
+    modint inv() const {
+        return this->pow(mod - 2);
     }
-    friend istream& operator>>(istream& is, Mint& m) {
+    friend istream& operator>>(istream& is, modint& m) {
         return is >> m.x;
     }
-    friend ostream& operator<<(ostream& os, Mint& m) {
+    friend ostream& operator<<(ostream& os, modint& m) {
         return os << m.x;
     }
 };
 
-typedef Mint<998244353> mint;
-
 const int precmax = 2e5;
-mint fact[precmax + 5]{ 1, 1 };
-mint inv[precmax + 5]{ 1, 1 };
-mint invf[precmax + 5]{ 1, 1 };
+modint fact[precmax + 5]{ 1, 1 };
+modint inv[precmax + 5]{ 1, 1 };
+modint invf[precmax + 5]{ 1, 1 };
 
 void prec() {
-    int modulo = mint().modulo();
+    int modulo = modint().modulo();
     for (int i = 2; i <= precmax; ++i) {
         fact[i] = fact[i - 1] * i;
         inv[i] = inv[modulo % i] * (modulo - modulo / i);
@@ -66,6 +63,6 @@ void prec() {
     }
 }
 
-mint combs(int n, int k) {
+modint combs(int n, int k) {
     return k < 0 || n < 0 || n - k < 0 ? 0 : fact[n] * invf[k] * invf[n - k];
 }
