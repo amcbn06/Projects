@@ -10,20 +10,23 @@ struct sum_fenwick {
         this->size = size;
         table.assign(size + 1, 0);
     }
+    // a[i] += x
     void add(int i, T x) {
         for (; i <= size; i += i & -i) {
             table[i] += x;
         }
     }
-    T get(int i) {
+    // sum(a[1...i])
+    T query(int i) {
         T sum = 0;
         for (; i > 0; i -= i & -i) {
             sum += table[i];
         }
         return sum;
     }
-    T get(int i, int j) {
-        return get(j) - get(i - 1);
+    // sum(a[i...j])
+    T query(int i, int j) {
+        return query(j) - query(i - 1);
     }
 };
 
