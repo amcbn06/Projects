@@ -1,0 +1,4 @@
+- add a line implementation
+- add a convex hull implementation
+- perhaps add a li chao implementation
+- reimplement the point implementation

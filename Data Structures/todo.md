@@ -1,0 +1,2 @@
+- reimplement the strings data structures
+- reimplement the segment trees

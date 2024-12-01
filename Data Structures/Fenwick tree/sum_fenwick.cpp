@@ -1,16 +1,17 @@
+// Works with indicies in range [1, size]
 template<typename T>
-struct fenwick {
+struct sum_fenwick {
     vector<T> table;
     int size;
-    fenwick(int size = 0) {
+    sum_fenwick(int size = 0) {
         this->resize(size);
     }
     void resize(int size) {
         this->size = size;
-        table.assign(size, 0);
+        table.assign(size + 1, 0);
     }
     void add(int i, T x) {
-        for (; i < size; i += i & -i) {
+        for (; i <= size; i += i & -i) {
             table[i] += x;
         }
     }
@@ -25,3 +26,5 @@ struct fenwick {
         return get(j) - get(i - 1);
     }
 };
+
+using fenwick = sum_fenwick<int>; 

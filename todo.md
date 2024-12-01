@@ -1,0 +1,2 @@
+- rewrite README
+- add polynome implementation
