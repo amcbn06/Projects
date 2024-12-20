@@ -19,6 +19,9 @@ namespace Geometry {
         friend istream& operator>>(istream& is, Point& pt) {
             return is >> pt.x >> pt.y;
         }
+        friend ostream& operator<<(ostream& os, Point& pt) {
+            return os << pt.x << " " << pt.y;
+        }
     };
 
     // the distance from point `u` to point `v`
@@ -45,7 +48,8 @@ namespace Geometry {
 
     // does the segment `s` include point `p`
     bool includes(Segment s, Point p) {
-        return _lse(min(s.u.x, s.v.x), p.x) && _lse(p.x, max(s.u.x, s.v.x)) && _lse(min(s.u.y, s.v.y), p.y) && _lse(p.y, max(s.u.y, s.v.y));
+        // satisfies the line equation and is in bounds
+        return _eq(s.a * p.x + s.b * p.y + s.c, 0) && _lse(min(s.u.x, s.v.x), p.x) && _lse(p.x, max(s.u.x, s.v.x)) && _lse(min(s.u.y, s.v.y), p.y) && _lse(p.y, max(s.u.y, s.v.y));
     }
 
     // the distance from point `p` to the segment `s`
@@ -54,7 +58,7 @@ namespace Geometry {
         Point q; // the projection of `u` onto the line of the segment
         q.x = (s.b * (s.b * p.x - s.a * p.y) - s.a * s.c) / (s.a * s.a + s.b * s.b);
         q.y = (s.a * (s.a * p.y - s.b * p.x) - s.b * s.c) / (s.a * s.a + s.b * s.b);
-        if (includes(s, p)) {
+        if (includes(s, q)) {
             return distance(p, q);
         }
         else {
